@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/users');
-const { model } = require('mongoose');
 
 // Get all users
 router.get('/', async (req, res) => {

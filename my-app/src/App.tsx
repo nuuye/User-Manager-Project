@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.scss";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -6,9 +6,9 @@ import TextField from "@mui/material/TextField";
 function App() {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [isInvalid, setIsInvalid] = React.useState(false);
+  const [message, setMessage] = React.useState("");
 
-  const verifyUser = async (username: string, password: string) => {
+  const handleLogin = async () => {
     try {
       const response = await fetch("http://localhost:3000/login/try", {
         method: "POST",
@@ -17,13 +17,25 @@ function App() {
         },
         body: JSON.stringify({ username, password }),
       });
+
       const data = await response.json();
-      if (data.status === 200) return true;
-      else return false;
+
+      if (response.ok) {
+        setMessage("Login successful");
+        // Do something with the user data if needed
+      } else {
+        setMessage(data.message || "Failed to login");
+      }
     } catch (error) {
+      setMessage("An error occurred");
       console.error("Error:", error);
     }
   };
+
+  useEffect(() => {
+    console.log("username:", username);
+    console.log("password", password);
+  }, [password, username]);
 
   return (
     <div className="App">
@@ -35,8 +47,7 @@ function App() {
             onSubmit={async (e) => {
               // When the form is submitted
               e.preventDefault(); // Prevents the page from refreshing
-              const isValid = await verifyUser(username, password);
-              setIsInvalid(!isValid);
+              await handleLogin();
             }}
           >
             <TextField
@@ -55,18 +66,7 @@ function App() {
               log in
             </Button>
           </form>
-          <p
-            className="invalidContainer"
-            style={{ display: isInvalid ? "block" : "none" }}
-          >
-            Invalid username or password, try again
-          </p>
-          <p
-            className="validContainer"
-            style={{ display: isInvalid ? "none" : "block" }}
-          >
-            Successfuly logged
-          </p>
+          <p className="invalidContainer">{message}</p>
         </div>
         <p className="registerContainer">
           Don't have an account? <span className="registerWord">Register</span>
