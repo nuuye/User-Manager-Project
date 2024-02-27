@@ -16,12 +16,12 @@ db.once('open', () => console.log('Connected to MongoDB'));
 
 app.use(express.json());
 // Import routes
-const usersRouter = require('./routes/register');
+const usersRouter = require('./routes/users');
 
 // Enable CORS for all routes
 app.use(cors());
 
-app.use('/register', usersRouter);
+app.use('/login', usersRouter);
 // Start server on port 3000
 app.listen(3000, () => {
     console.log('Server listening on port 3000');
