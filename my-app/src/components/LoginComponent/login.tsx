@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import "./login.scss";
+import styles from './login.module.scss';
 
 type Props = {};
 
@@ -43,11 +43,11 @@ function Login(props: Props) {
   }, [password, username]);
 
   return (
-    <div className="Login">
-      <div className="LoginContainer">
-        <h1 className="Title">Please log in to your account:</h1>
+    <div className={styles.Login}>
+      <div className={styles.LoginContainer}>
+        <h1 className={styles.Title}>Please log in to your account:</h1>
         <form
-          className="formContainer"
+          className={styles.formContainer}
           onSubmit={async (e) => {
             // When the form is submitted
             e.preventDefault(); // Prevents the page from refreshing
@@ -75,7 +75,7 @@ function Login(props: Props) {
           {message}
         </p>
       </div>
-      <p className="registerContainer">
+      <p className={styles.registerContainer}>
         Don't have an account? <span className="registerWord">Register</span>
       </p>
     </div>

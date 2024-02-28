@@ -16,7 +16,7 @@ db.once('open', () => console.log('Connected to MongoDB'));
 
 app.use(express.json());
 // Import routes
-const usersRouter = require('./routes/users');
+const usersRouter = require('./routes/login');
 
 // Enable CORS for all routes
 app.use(cors());
