@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./register.module.scss";
 import { Button, TextField } from "@mui/material";
+import { useRouter } from "next/router";
 
 type Props = {};
 
@@ -9,8 +10,8 @@ function Register(props: Props) {
   const [password, setPassword] = React.useState("");
   const [verificationPassword, setVerificationPassword] = React.useState("");
   const [message, setMessage] = React.useState("Create account");
-  const [errorMessage, setErrorMessage] = React.useState("");
   const [submitted, setSubmitted] = React.useState(false);
+  const router = useRouter();
 
   const handleAccount = async () => {
     if (password === verificationPassword) {
@@ -25,12 +26,19 @@ function Register(props: Props) {
 
         if (response.ok) {
           setMessage("Account created!");
+          handleRedirect();
         } else {
         }
       } catch (error) {
         console.error("Error:", error);
       }
     }
+  };
+
+  const handleRedirect = () => {
+    setTimeout(() => {
+      router.push("/");
+    }, 1000); // Redirection après 1 seconde (1000 millisecondes)
   };
 
   const IdenticalPasswords = () => {
