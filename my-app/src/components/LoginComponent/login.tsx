@@ -1,7 +1,8 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import styles from './login.module.scss';
+import styles from "./login.module.scss";
+import { useRouter } from "next/router";
 
 type Props = {};
 
@@ -10,6 +11,11 @@ function Login(props: Props) {
   const [password, setPassword] = React.useState("");
   const [message, setMessage] = React.useState("");
   const [messageColor, setMessageColor] = React.useState("red");
+  const router = useRouter();
+
+  const handleRegisterClick = () => {
+    router.push("/register");
+  };
 
   const handleLogin = async () => {
     try {
@@ -68,7 +74,7 @@ function Login(props: Props) {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button variant="contained" type="submit">
-            log in
+            LOGIN
           </Button>
         </form>
         <p className="invalidContainer" style={{ color: messageColor }}>
@@ -76,7 +82,10 @@ function Login(props: Props) {
         </p>
       </div>
       <p className={styles.registerContainer}>
-        Don't have an account? <span className="registerWord">Register</span>
+        Don't have an account?{" "}
+        <Button onClick={handleRegisterClick} className="registerWord">
+          Register
+        </Button>
       </p>
     </div>
   );

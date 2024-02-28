@@ -24,18 +24,8 @@
       color: green;
       font-size: small;
     }
-    .MuiButton-root {
-      border-radius: 50px;
-    }
   }
   .registerContainer {
-    .registerWord {
-      &:hover {
-        text-decoration: underline;
-        color: #053975;
-        cursor: pointer;
-      }
-    }
     font-size: medium;
     color: #057796;
   }
