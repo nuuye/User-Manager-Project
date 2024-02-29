@@ -41,7 +41,7 @@ router.post('/try', async (req, res) => {
 });
 
 // Modify a parameter
-router.post('/:id', getUser, async (req, res) => {
+router.patch('/:id', getUser, async (req, res) => {
     if (req.body.username != null) res.user.username = req.body.username;
     if (req.body.password != null) res.user.password = req.body.password;
     if (req.body.balance != null) res.user.balance = req.body.balance;
@@ -54,7 +54,7 @@ router.post('/:id', getUser, async (req, res) => {
 });
 
 // Delete an account
-router.post('/', getUser, async (req, res) => {
+router.delete('/:id', getUser, async (req, res) => {
     try {
         await res.user.deleteOne()
         res.json({ message: "Account deleted" })
