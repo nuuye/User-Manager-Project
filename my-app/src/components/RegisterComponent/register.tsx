@@ -27,7 +27,6 @@ function Register(props: Props) {
         if (response.ok) {
           setMessage("Account created!");
           handleRedirect();
-        } else {
         }
       } catch (error) {
         console.error("Error:", error);

@@ -11,10 +11,20 @@ function Login(props: Props) {
   const [password, setPassword] = React.useState("");
   const [message, setMessage] = React.useState("");
   const [messageColor, setMessageColor] = React.useState("red");
+  const [loginStatus, setLoginStatus] = React.useState(false);
   const router = useRouter();
 
   const handleRegisterClick = () => {
     router.push("/register");
+  };
+
+  const handleLoginClick = () => {
+    if (loginStatus) {
+      setTimeout(() => {
+        router.push("/panel");
+      }, 1000);
+    }
+    setLoginStatus(false);
   };
 
   const handleLogin = async () => {
@@ -32,10 +42,12 @@ function Login(props: Props) {
       if (response.ok) {
         setMessage("Login successful");
         setMessageColor("green");
+        setLoginStatus(true);
         // Do something with the user data if needed
       } else {
         setMessage(data.message || "Failed to login");
         setMessageColor("red");
+        setLoginStatus(false);
       }
     } catch (error) {
       setMessage("An error occurred");
@@ -58,6 +70,7 @@ function Login(props: Props) {
             // When the form is submitted
             e.preventDefault(); // Prevents the page from refreshing
             await handleLogin();
+            handleLoginClick();
           }}
         >
           <TextField
